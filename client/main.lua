@@ -72,7 +72,7 @@ AddEventHandler('esx_basicneeds:isEating', function(cb)
 end)
 
 RegisterNetEvent('esx_basicneeds:onUse')
-AddEventHandler('esx_basicneeds:onUse', function(type, prop_name, anim)
+AddEventHandler('esx_basicneeds:onUse', function(type, prop_name, anim, pos)
 	if not IsAnimated then
 		local anim = anim
 		IsAnimated = true
@@ -89,7 +89,7 @@ AddEventHandler('esx_basicneeds:onUse', function(type, prop_name, anim)
 			local x,y,z = table.unpack(GetEntityCoords(playerPed))
 			local prop = CreateObject(joaat(prop_name), x, y, z + 0.2, true, true, true)
 			local boneIndex = GetPedBoneIndex(playerPed, 18905)
-			AttachEntityToEntity(prop, playerPed, boneIndex, 0.12, 0.028, 0.001, 10.0, 175.0, 0.0, true, true, false, true, 1, true)
+			AttachEntityToEntity(prop, playerPed, boneIndex, pos.x, pos.y, pos.z, pos.x_rotation, pos.y_rotation, pos.z_rotation, true, true, false, true, 1, true)
 
 			ESX.Streaming.RequestAnimDict(anim.dict, function()
 				TaskPlayAnim(playerPed, anim.dict, anim.name, anim.settings[1], anim.settings[2], anim.settings[3], anim.settings[4], anim.settings[5], anim.settings[6], anim.settings[7], anim.settings[8])
